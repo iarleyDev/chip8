@@ -5,7 +5,6 @@ import java.util.Random;
 
 
 /**
- * @author Ismael Rodríguez, ismaro3
  * Processing unit of the CPU.
  * It implements all the CPU ops.
  */
