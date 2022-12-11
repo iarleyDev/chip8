@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * @author Ismael Rodríguez, ismaro3
  * This class implements the whole Chip8 System.
  * Usage: Create a new Chip8 object, call loadGame to load a game, and then call startEmulationLoop.
  */
