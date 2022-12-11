@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * @author Ismael Rodríguez, ismaro3
  * JPanel that manages screen.
  */
 class Screen extends JPanel {
