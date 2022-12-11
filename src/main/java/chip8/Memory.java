@@ -1,7 +1,5 @@
 package chip8;
 /**
- * @author Ismael Rodríguez, ismaro3
- *
  * Class that implements main memory, stack, screen memory (pixels) and drawFlag.
  * 4096 Bytes of memory.
  * Each address is 16bit.
