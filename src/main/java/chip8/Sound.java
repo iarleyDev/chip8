@@ -6,9 +6,6 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
 /**
- *Based on michaelarnauts Sound.java class from its chip8-java project.
- *https://github.com/michaelarnauts/chip8-java/blob/master/Source/src/be/khleuven/arnautsmichael/chip8/Sound.java
- *
  * Class that manages the sound.
  */
 public class Sound  {
