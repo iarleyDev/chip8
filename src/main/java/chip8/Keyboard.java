@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
- * @author Ismael Rodríguez, ismaro3
  *
  * Class that manages the keyboard input.
  *
