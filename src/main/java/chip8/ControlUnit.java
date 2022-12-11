@@ -1,7 +1,6 @@
 package chip8;
 
 /**
- * @author Ismael Rodríguez, ismaro3
  * Control unit of the CPU.
  * It manages fetch, decode and execute phase.
  */
