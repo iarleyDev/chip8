@@ -2,7 +2,6 @@ package chip8;
 
 
 /**
- * @author Ismael Rodríguez, ismaro3
  *
  * Main class, launches the emulator at the specified frequency and rom.
  * Only chip-8 system is implemented (Not chip-48 or anything else).
