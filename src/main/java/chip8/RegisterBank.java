@@ -1,7 +1,6 @@
 package chip8;
 
 /**
- * @author Ismael Rodríguez, ismaro3
  * Implements register Bank.
  */
 public class RegisterBank {
