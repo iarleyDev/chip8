@@ -5,8 +5,9 @@ package chip8;
  * Each address is 16bit.
  */
 public class Memory {
-
-
+                                                
+    private boolean[] pointers = new boolean[4];       // 4 bytes on mem
+    
     //Preferences of screen
     private static int width = 64;
     private static int height = 32;
@@ -85,6 +86,7 @@ public class Memory {
         short currentAddress = startAddress;
         while(currentAddress<=endAddress){
            System.out.println(String.format("0x%03X:  %02X",currentAddress,memory[currentAddress]));
+           System.out.println(pointers[currentAdress]);
             currentAddress+=0x1;
         }
 
@@ -95,7 +97,8 @@ public class Memory {
      */
     private  void loadDefaultSpritesOnMemory(){
         for(byte i = 0; i < sprite_0.length;i++){
-            set((short)(hexadecimalSpritesStartAddress + i),sprite_0[i]);
+            if (pointers[i]) 
+                set((short)(hexadecimalSpritesStartAddress + i),sprite_0[i]);
         }
         for(byte i = 0; i < sprite_1.length;i++){
             set((short)(hexadecimalSpritesStartAddress +5 + i),sprite_1[i]);
