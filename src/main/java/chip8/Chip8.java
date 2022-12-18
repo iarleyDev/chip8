@@ -25,6 +25,7 @@ public class Chip8 {
     private Keyboard keyboard;
     private Sound sound;
     
+    // it begins a new process
     private boolean begin() {
         return this.periodNanos != 0;
     }
