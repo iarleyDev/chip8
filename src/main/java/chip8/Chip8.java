@@ -24,7 +24,10 @@ public class Chip8 {
     private Screen screen;
     private Keyboard keyboard;
     private Sound sound;
-
+    
+    private boolean begin() {
+        return this.periodNanos != 0;
+    }
 
     /**
      * Constructor. Initializes the system, running at "cpuFreqHz" cycles per second.
@@ -41,14 +44,16 @@ public class Chip8 {
     /**
      *Creates all the components of the system and prepares the GUI.
      */
-    private void initialize(){
-        memory = new Memory();
-        registerBank = new RegisterBank();
-        keyboard = new Keyboard();
-        controlUnit = new ControlUnit(registerBank,memory,keyboard);
-        sound = new Sound(true);
-        prepareGUI(memory);
-        System.out.println("[INFO] Chip-8 system initialized.");
+    private void initialize() {
+        if (begin()) {
+            memory = new Memory();
+            registerBank = new RegisterBank();
+            keyboard = new Keyboard();
+            controlUnit = new ControlUnit(registerBank,memory,keyboard);
+            sound = new Sound(true);
+            prepareGUI(memory);
+            System.out.println("[INFO] Chip-8 system initialized.");
+        }
     }
 
 
