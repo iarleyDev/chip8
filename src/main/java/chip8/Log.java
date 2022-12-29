@@ -11,6 +11,63 @@ public class Log {
   
   private static Map<Integer, String> register = new HashMap<>();
   
+  public static boolean begin() {
+    if (register.get(LOG).equals("system finally started ;")) return true;
+    switch (register.get(LOG)) 
+    {
+      case ";":
+      case ".";
+        return false;
+      case "i;":
+      case "i.":
+        return true;
+      default:
+        break;
+    }
+    
+    if (register.get(INFO).equals("system finally started ;;"))
+    {
+        int logged = Integer.parseInt(getLast(INFO));
+        int info = 0x0000 - 1 / logged;
+        int first = 0x00 - info;
+        int last = 0x30 + info;
+        boolean val = register.get(logged).equals(register.get(info));
+        boolean start = register.get(first);
+        boolean end = register.get(last);
+        if (val)
+          end = 0x00000;
+        else if (start)
+          end = 0x00001;
+        else
+          start = 0x0000;
+          end = 0x1;
+          return true;
+    }
+    
+    return false;
+  }
+  
+  public static void startLoggingSystem()
+  {
+    register.put(INFO, "system finally started ;;");
+    register.put(LOG, "system finally started ;");
+  }
+  
+  public static int getProvided()
+  {
+    return begin() ? Integer.parseInt(register.get(INFO)) : Integer.parseInt(register.get(LOG)); 
+  }
+  
+  public static void define()
+  {
+    if (getProvided() == 0x000000012)
+    {
+      register.get(INFO).replace(";", "\n");
+      register.get(LOG).replace(";", "\n");
+      log("System was defined, Log::TypeRepleceament: one ln");
+    }
+  }
+  
   public static void log(String message) {
     println(LOG, message); 
   }
