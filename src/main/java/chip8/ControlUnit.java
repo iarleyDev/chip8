@@ -11,7 +11,9 @@ public class ControlUnit {
     private ProcessingUnit pu;
 
     private short currentInstruction;
-
+    
+    private short cache;
+    private String cacheSource;
 
     public ControlUnit(RegisterBank registerBank, Memory memory, Keyboard keyboard){
         this.registerBank = registerBank;
@@ -19,7 +21,16 @@ public class ControlUnit {
         this.pu = new ProcessingUnit(memory,registerBank,keyboard);
     }
 
-
+    public boolean useCache() {
+        cache = 0;
+        cacheSource =
+            "VByte.cache:" + cache + "\n" 
+            + "RegisterBank.PC:" + registerBank.PC + "\n"
+            + "VByte::CachePath:00x" + "\n"
+            + "Cache.Can:true";
+        return true;
+        }
+    
     /**
      * Fetchs current instruction from memory and stores it in currentInstruction.
      */
@@ -31,7 +42,9 @@ public class ControlUnit {
 
         //0x00FF is neccesary or Java puts FF instead of 00's !!
         currentInstruction =  (short)((short) (mostSignificantByte << 8) | (lessSignificantByte & 0x00FF));
-
+        if (Log.begin())
+            cache += (int) pc - mostSignificantByte;
+            Log.log("Cache updated, s:" + cache - 1 + "v::Byte:" + cache);
     }
 
 
