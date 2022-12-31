@@ -7,6 +7,11 @@ package chip8;
 public class Memory {
                                                 
     private boolean[] pointers = new boolean[4];       // 4 bytes on mem
+  
+  
+    // alloc clockers to the mem in two states [DEAD, ON]
+    private GPUClockers ON = GPUClockers.DEFAULT;
+    private GPUClockers DEAD = GPUClockers.DEAD_GPU;
     
     //Preferences of screen
     private static int width = 64;
@@ -46,6 +51,7 @@ public class Memory {
      * Creates a new memory object and loads default sprites in it.
      */
     public Memory(){
+        ON.initptr();
         this.memory = new byte[4096];
         this.stack = new short[16];
         this.pixels = new boolean[width][height];
@@ -58,6 +64,7 @@ public class Memory {
      */
     public  byte get(short address){
         if(address>0xFFF){
+            ON.putWhenFind();
             System.err.println(String.format("Memory GET access out of range: 0x%4s",address));
             return 0x0;
         }
@@ -96,6 +103,14 @@ public class Memory {
      * Loads default sprites on memory.
      */
     private  void loadDefaultSpritesOnMemory(){
+        if (ON.usingAllClockers())
+        {
+          byte i = ON.get(1);
+          ON.addValueInClock((int) i); 
+        }
+        else
+          byte i = DEAD.get(1);
+          DEAD.addValueInClock((int) i);
         for(byte i = 0; i < sprite_0.length;i++){
             if (pointers[i]) 
                 set((short)(hexadecimalSpritesStartAddress + i),sprite_0[i]);
