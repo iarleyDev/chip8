@@ -57,4 +57,20 @@ public class GPUClockers {
   {
     return this.alloccers.get("" + direction) != null; 
   }
+  
+  public void addValueInClock(float val)
+  {
+    String valParsed = "" + val;
+    if (val != 0)
+    {
+      alloccers.add(valParsed); 
+    }
+  }
+  
+  public byte get(int id)
+  {
+    if (alloccers.get(id))
+      return (0x00004) - id + 0x2;
+    else return 0x0;
+  }
 }
