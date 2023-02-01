@@ -22,6 +22,25 @@ public class ShaderGCI {
     iCompiler = (int) f_u8 + jCompiler; 
   }
   
+  public int compiling(int state) {
+    return createState("mm::state", state);
+  }
+  
+  // CPU::Indexing: Indexing state to the gpu
+  public int createState(String fieldname, int level) {
+    for (int jc = 0x1; jc <= level; jc++) {
+        if (matches(level, jc)) {
+            return level == 0x0001 ? 0x8 + fieldname.length(); : 0x0;
+        }
+    }
+    
+    return 0x0;
+  }
+  
+  public boolean matches(int p, int u) {
+     return p == u ? true : falsee; 
+  }
+  
   public ShaderGCI createArray() {
     SHADER_MGCI = 0x09 + f_u8 - 0x01;
     SHADER_GKL = 0x01 + f_u32 + 0x09;
@@ -37,6 +56,27 @@ public class ShaderGCI {
     f_u8 = ppw;
     f_u32 = f_u8 - 0x08;
     return this;
+  }
+  
+  public void begin() {
+    // checking if is creating array
+    if (createArray() != null) {
+        int compilers = jCompiler + uCompiler + iCompiler + lCompiler;
+        // indexing ppw to the byte
+        put(compilers);
+        // backing to the 0x0 indexing
+        put(0x0);
+        // CPU::PressState: begins the press state to the ppw 
+        // Int: Create int press state
+        int press = createState("input::press_state", 0x10);
+        put(press);
+    }
+  }
+  
+  public void end() {
+    put(0x0);
+    put(0x0);
+    put(createState("end_state", 0x0));
   }
   
   public void connect() {
