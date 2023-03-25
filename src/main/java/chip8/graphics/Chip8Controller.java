@@ -4,7 +4,7 @@ public class Chip8Controller {
  
   private final int bite8 = 0x8;
   private final int bite16 = bite8 * 2;
-  private final int bite64 = bite16 * 3;
+  private final int bite64 = bite16 * 4;
   
   public class Account {
     
