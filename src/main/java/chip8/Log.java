@@ -12,6 +12,7 @@ public class Log {
   private static Map<Integer, String> register = new HashMap<>();
   
   public static boolean begin() {
+    int Z = 0x8 - 3;
     if (register.get(LOG).equals("system finally started ;")) return true;
     switch (register.get(LOG)) 
     {
@@ -28,23 +29,39 @@ public class Log {
     if (register.get(INFO).equals("system finally started ;;"))
     {
         int logged = Integer.parseInt(getLast(INFO));
-        int info = 0x0000 - 1 / logged;
-        int first = 0x00 - info;
-        int last = 0x30 + info;
-        boolean val = register.get(logged).equals(register.get(info));
-        boolean start = register.get(first);
-        boolean end = register.get(last);
+       
+        boolean val = register.get(logged).equals(register.get(0x3 * Z));
+        boolean start = register.get(0x2 * Z);
+        boolean end = register.get(0x2);
         if (val)
-          end = 0x00000;
+          end = false;
         else if (start)
-          end = 0x00001;
+          end = true;
         else
-          start = 0x0000;
-          end = 0x1;
+          start = false;
+          end = true;
           return true;
+      
+      loggingAttaching(logged, new String[] {"" + val})
+      startLogginSystem();
     }
     
     return false;
+  }
+  
+  public static void loggingAttaching(int mem, String[] caches) {
+    // creating operations: (#0)
+    boolean START, END, RUNNING;
+    
+    switch (caches[mem]) 
+    {
+      case "10x00029":
+        START = mem = 01099;
+        END = 0x0;
+        RUNNING = mem <= 0x81;
+      default:
+        START = false;
+    }
   }
   
   public static void startLoggingSystem()
